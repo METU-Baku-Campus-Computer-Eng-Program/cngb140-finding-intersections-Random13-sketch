@@ -19,6 +19,7 @@ int main() {
         scanf("%d", &set2[i]);
     }
 
+    // Find intersection without duplicates
     for(i = 0; i < n1; i++){
         for(j = 0; j < n2; j++){
             if(set1[i] == set2[j]){
@@ -32,8 +33,7 @@ int main() {
                 }
 
                 if(!found){
-                    intersection[count] = set1[i];
-                    count++;
+                    intersection[count++] = set1[i];
                 }
 
                 break;
@@ -41,8 +41,21 @@ int main() {
         }
     }
 
+    // Sort intersection array (ascending)
+    for(i = 0; i < count - 1; i++){
+        for(j = i + 1; j < count; j++){
+            if(intersection[i] > intersection[j]){
+                int temp = intersection[i];
+                intersection[i] = intersection[j];
+                intersection[j] = temp;
+            }
+        }
+    }
+
+    // Print result
     for(i = 0; i < count; i++){
-        printf("%d ", intersection[i]);
+        printf("%d", intersection[i]);
+        if(i < count - 1) printf(" ");
     }
 
     return 0;
